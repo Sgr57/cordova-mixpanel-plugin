@@ -111,6 +111,7 @@
     NSString* token = [arguments objectAtIndex:0];
 
     Mixpanel* mixpanelInstance = [Mixpanel sharedInstanceWithToken:token];
+    [mixpanelInstance setServerURL: @"https://api-eu.mixpanel.com"];
     [mixpanelInstance setFlushInterval:60];
 
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
