@@ -77,9 +77,20 @@ mixpanel.identify = function(id, usePeople, onSuccess, onFail) {
   exec(onSuccess, onFail, 'Mixpanel', 'identify', [id, !!usePeople]);
 };
 
-mixpanel.init = function(token, onSuccess, onFail) {
-  if (!token || typeof token != 'string') {
-    return onFail(errors.invalid('token', token));
+/**
+ *
+ * @param opts example:
+ *      {
+ *        'token': value to use as api key,
+ *        'serverURL': value to use as endpoint (only on ios)
+ *      }
+ */
+mixpanel.init = function(opts, onSuccess, onFail) {
+  if (!opts || typeof opts != 'object') {
+    return onFail(errors.invalid('opts', opts));
+  }
+  if (!opts.token || typeof opts.token != 'string') {
+    return onFail(errors.invalid('token', opts.token));
   }
 
   var onSuccessWrapper = function(){
@@ -87,7 +98,7 @@ mixpanel.init = function(token, onSuccess, onFail) {
     onSuccess.apply(onSuccess, arguments);
   }
 
-  exec(onSuccessWrapper, onFail, 'Mixpanel', 'init', [token]);
+  exec(onSuccessWrapper, onFail, 'Mixpanel', 'init', [opts.token, opts.serverURL]);
 };
 
 mixpanel.registerSuperProperties = function(superProperties, onSuccess, onFail) {

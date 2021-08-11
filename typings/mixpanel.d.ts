@@ -2,7 +2,7 @@ interface IMixpanel {
 
   people: Mixpanel.IPeople;
 
-  init(token: string, onSuccess: () => void, onFail: (errors: string) => void): void;
+  init(opts: {token: string, serverURL?: string}, onSuccess: () => void, onFail: (errors: string) => void): void;
 
   alias(alias: string, originalId: string, onSuccess: () => void, onFail: (errors: string) => void): void;
   createAlias(alias: string, originalId: string, onSuccess: () => void, onFail: (errors: string) => void): void;

@@ -113,6 +113,11 @@
     Mixpanel* mixpanelInstance = [Mixpanel sharedInstanceWithToken:token];
     [mixpanelInstance setFlushInterval:60];
 
+    if ([arguments count] > 1) {
+        NSString *serverURL = [arguments objectAtIndex:1];
+        [mixpanelInstance setServerURL: serverURL];
+    }
+
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
